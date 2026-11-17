@@ -1,0 +1,11 @@
+pandas
+pyarrow
+openpyxl
+requests
+scikit-learn
+shap
+joblib
+streamlit
+plotly
+fpdf2
+geopandas

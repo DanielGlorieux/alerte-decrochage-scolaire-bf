@@ -1,0 +1,44 @@
+variable,libelle,taux_remplissage,source
+code_region,Code ISO 3166-2 de la région (BF = national),,DCB
+region,Région (découpage en 13 régions),,DCB
+annee_scolaire,Année scolaire (ex. 2015-2016),,DCB
+annee_fin,Année civile de fin d'année scolaire (session du CEP),,DCB
+presco_effectif_f,Effectif d'élèves - filles (préscolaire),100%,DCB
+presco_effectif_g,Effectif d'élèves - garçons (préscolaire),100%,DCB
+presco_effectif_t,Effectif d'élèves - ensemble (préscolaire),100%,DCB
+presco_ips_tbs,Indice de parité des sexes du TBS (F/G) (préscolaire),100%,DCB
+presco_salles_communautaire,Nombre de salles de classe du préscolaire - communautaire (préscolaire),93%,DCB
+presco_salles_prive,Nombre de salles de classe du préscolaire - privé (préscolaire),93%,DCB
+presco_salles_public,Nombre de salles de classe du préscolaire - public (préscolaire),93%,DCB
+presco_salles_total,Nombre de salles de classe du préscolaire - tous statuts (préscolaire),100%,DCB
+presco_structures_communautaire,Nombre de structures préscolaires - communautaire (préscolaire),93%,DCB
+presco_structures_prive,Nombre de structures préscolaires - privé (préscolaire),93%,DCB
+presco_structures_public,Nombre de structures préscolaires - public (préscolaire),93%,DCB
+presco_structures_total,Nombre de structures préscolaires - tous statuts (préscolaire),100%,DCB
+presco_tbs_f,Taux brut de scolarisation (%) - filles (préscolaire),100%,DCB
+presco_tbs_g,Taux brut de scolarisation (%) - garçons (préscolaire),100%,DCB
+presco_tbs_t,Taux brut de scolarisation (%) - ensemble (préscolaire),100%,DCB
+prim_cep_f,Taux de réussite au CEP (%) - filles (primaire),100%,DCB
+prim_cep_g,Taux de réussite au CEP (%) - garçons (primaire),100%,DCB
+prim_cep_t,Taux de réussite au CEP (%) - ensemble (primaire),100%,DCB
+prim_ecoles_prive,Nombre d'écoles primaires - privé (primaire),100%,DCB
+prim_ecoles_public,Nombre d'écoles primaires - public (primaire),100%,DCB
+prim_ecoles_total,Nombre d'écoles primaires - tous statuts (primaire),100%,DCB
+prim_effectif_f,Effectif d'élèves - filles (primaire),100%,DCB
+prim_effectif_g,Effectif d'élèves - garçons (primaire),100%,DCB
+prim_effectif_t,Effectif d'élèves - ensemble (primaire),100%,DCB
+prim_ips_tap,Indice de parité des sexes du TAP (F/G) (primaire),100%,DCB
+prim_ips_tba,Indice de parité des sexes du TBA (F/G) (primaire),100%,DCB
+prim_ips_tbs,Indice de parité des sexes du TBS (F/G) (primaire),100%,DCB
+prim_nouveaux_cp1_f,Nouveaux inscrits au CP1 - filles (primaire),100%,DCB
+prim_nouveaux_cp1_g,Nouveaux inscrits au CP1 - garçons (primaire),100%,DCB
+prim_nouveaux_cp1_t,Nouveaux inscrits au CP1 - ensemble (primaire),100%,DCB
+prim_tap_f,Taux d'achèvement du primaire (%) - filles (primaire),100%,DCB
+prim_tap_g,Taux d'achèvement du primaire (%) - garçons (primaire),100%,DCB
+prim_tap_t,Taux d'achèvement du primaire (%) - ensemble (primaire),100%,DCB
+prim_tba_f,Taux brut d'admission (%) - filles (primaire),100%,DCB
+prim_tba_g,Taux brut d'admission (%) - garçons (primaire),100%,DCB
+prim_tba_t,Taux brut d'admission (%) - ensemble (primaire),100%,DCB
+prim_tbs_f,Taux brut de scolarisation (%) - filles (primaire),100%,DCB
+prim_tbs_g,Taux brut de scolarisation (%) - garçons (primaire),100%,DCB
+prim_tbs_t,Taux brut de scolarisation (%) - ensemble (primaire),100%,DCB

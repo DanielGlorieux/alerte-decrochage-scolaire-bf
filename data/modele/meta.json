@@ -1,0 +1,41 @@
+{
+ "modele_retenu": "Forêt aléatoire",
+ "variables": {
+  "abandon_t": "Taux d'abandon de l'année (%)",
+  "moyenne_historique": "Taux d'abandon moyen de la région depuis 2015-16 (%)",
+  "redoublement_t": "Taux de redoublement (%)",
+  "achevement_t": "Taux d'achèvement du primaire (%)",
+  "ecart_abandon_f_g": "Écart d'abandon filles - garçons (points)",
+  "var_effectif_pct": "Variation annuelle des effectifs (%)",
+  "var_ecoles_pct": "Variation annuelle du nombre d'écoles (%)",
+  "var_nouveaux_cp1_pct": "Variation annuelle des nouveaux inscrits au CP1 (%)",
+  "ratio_eleves_maitre": "Élèves par maître",
+  "eleves_par_salle": "Élèves par salle de classe",
+  "pct_ecoles_eau": "Écoles avec eau potable (%)",
+  "pct_ecoles_latrines": "Écoles avec latrines fonctionnelles (%)",
+  "pct_ecoles_cantine": "Écoles avec cantine (%)",
+  "pct_ecoles_electricite": "Écoles avec électricité (%)",
+  "ecart_parite_tbs": "Écart à la parité du TBS",
+  "ecart_parite_tap": "Écart à la parité de l'achèvement",
+  "tbs": "Taux brut de scolarisation (%)",
+  "tba": "Taux brut d'admission (%)",
+  "cep": "Taux de réussite au CEP (%)",
+  "part_ecoles_privees": "Part d'écoles privées (%)",
+  "tbs_prescolaire": "Taux brut de scolarisation au préscolaire (%)"
+ },
+ "annee_donnees": "2024-2025",
+ "annee_prevue": "2025-2026",
+ "seuils_niveaux": [
+  6.6,
+  8.8,
+  12.9
+ ],
+ "demi_intervalle_80": 12.7,
+ "base_shap": 10.66,
+ "n_apprentissage": 117,
+ "erreur_modele": 7.47,
+ "erreur_persistance": 7.39,
+ "erreur_moyenne_historique": 6.28,
+ "correlation_rang_modele": 0.5,
+ "bat_les_references": false
+}

@@ -1,0 +1,7 @@
+modele,erreur_absolue_moyenne,erreur_absolue_mediane,rmse,correlation_rang,top4_retrouve
+Persistance (référence),7.39,2.68,12.32,0.27,0.5
+Moyenne historique (référence),6.28,3.35,9.74,0.5,0.6
+Indice composite seul,7.2,4.22,10.98,-0.33,0.15
+Régression (Ridge),7.68,4.21,11.71,0.42,0.55
+Forêt aléatoire,7.47,4.21,11.33,0.5,0.55
+Gradient boosting,7.64,3.68,11.72,0.38,0.6

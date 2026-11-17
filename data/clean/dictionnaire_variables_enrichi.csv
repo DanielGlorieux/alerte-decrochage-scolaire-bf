@@ -1,0 +1,127 @@
+variable,libelle,taux_remplissage,source
+code_region,Code ISO 3166-2 de la région (BF = national),,DCB
+region,Région (découpage en 13 régions),,DCB
+annee_scolaire,Année scolaire (ex. 2015-2016),,DCB
+annee_fin,Année civile de fin d'année scolaire (session du CEP),,DCB
+presco_effectif_f,Effectif d'élèves - filles (préscolaire),100%,DCB
+presco_effectif_g,Effectif d'élèves - garçons (préscolaire),100%,DCB
+presco_effectif_t,Effectif d'élèves - ensemble (préscolaire),100%,DCB
+presco_ips_tbs,Indice de parité des sexes du TBS (F/G) (préscolaire),100%,DCB
+presco_salles_communautaire,Nombre de salles de classe du préscolaire - communautaire (préscolaire),93%,DCB
+presco_salles_prive,Nombre de salles de classe du préscolaire - privé (préscolaire),93%,DCB
+presco_salles_public,Nombre de salles de classe du préscolaire - public (préscolaire),93%,DCB
+presco_salles_total,Nombre de salles de classe du préscolaire - tous statuts (préscolaire),100%,DCB
+presco_structures_communautaire,Nombre de structures préscolaires - communautaire (préscolaire),93%,DCB
+presco_structures_prive,Nombre de structures préscolaires - privé (préscolaire),93%,DCB
+presco_structures_public,Nombre de structures préscolaires - public (préscolaire),93%,DCB
+presco_structures_total,Nombre de structures préscolaires - tous statuts (préscolaire),100%,DCB
+presco_tbs_f,Taux brut de scolarisation (%) - filles (préscolaire),100%,DCB
+presco_tbs_g,Taux brut de scolarisation (%) - garçons (préscolaire),100%,DCB
+presco_tbs_t,Taux brut de scolarisation (%) - ensemble (préscolaire),100%,DCB
+prim_cep_f,Taux de réussite au CEP (%) - filles (primaire),100%,DCB
+prim_cep_g,Taux de réussite au CEP (%) - garçons (primaire),100%,DCB
+prim_cep_t,Taux de réussite au CEP (%) - ensemble (primaire),100%,DCB
+prim_ecoles_prive,Nombre d'écoles primaires - privé (primaire),100%,DCB
+prim_ecoles_public,Nombre d'écoles primaires - public (primaire),100%,DCB
+prim_ecoles_total,Nombre d'écoles primaires - tous statuts (primaire),100%,DCB
+prim_effectif_f,Effectif d'élèves - filles (primaire),100%,DCB
+prim_effectif_g,Effectif d'élèves - garçons (primaire),100%,DCB
+prim_effectif_t,Effectif d'élèves - ensemble (primaire),100%,DCB
+prim_ips_tap,Indice de parité des sexes du TAP (F/G) (primaire),100%,DCB
+prim_ips_tba,Indice de parité des sexes du TBA (F/G) (primaire),100%,DCB
+prim_ips_tbs,Indice de parité des sexes du TBS (F/G) (primaire),100%,DCB
+prim_nouveaux_cp1_f,Nouveaux inscrits au CP1 - filles (primaire),100%,DCB
+prim_nouveaux_cp1_g,Nouveaux inscrits au CP1 - garçons (primaire),100%,DCB
+prim_nouveaux_cp1_t,Nouveaux inscrits au CP1 - ensemble (primaire),100%,DCB
+prim_tap_f,Taux d'achèvement du primaire (%) - filles (primaire),100%,DCB
+prim_tap_g,Taux d'achèvement du primaire (%) - garçons (primaire),100%,DCB
+prim_tap_t,Taux d'achèvement du primaire (%) - ensemble (primaire),100%,DCB
+prim_tba_f,Taux brut d'admission (%) - filles (primaire),100%,DCB
+prim_tba_g,Taux brut d'admission (%) - garçons (primaire),100%,DCB
+prim_tba_t,Taux brut d'admission (%) - ensemble (primaire),100%,DCB
+prim_tbs_f,Taux brut de scolarisation (%) - filles (primaire),100%,DCB
+prim_tbs_g,Taux brut de scolarisation (%) - garçons (primaire),100%,DCB
+prim_tbs_t,Taux brut de scolarisation (%) - ensemble (primaire),100%,DCB
+prim_abandon_ce1_f,Taux d'abandon (%) - CE1 - filles,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_abandon_ce1_g,Taux d'abandon (%) - CE1 - garçons,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_abandon_ce1_t,Taux d'abandon (%) - CE1 - ensemble,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_abandon_ce2_f,Taux d'abandon (%) - CE2 - filles,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_abandon_ce2_g,Taux d'abandon (%) - CE2 - garçons,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_abandon_ce2_t,Taux d'abandon (%) - CE2 - ensemble,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_abandon_cm1_f,Taux d'abandon (%) - CM1 - filles,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_abandon_cm1_g,Taux d'abandon (%) - CM1 - garçons,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_abandon_cm1_t,Taux d'abandon (%) - CM1 - ensemble,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_abandon_cp1_f,Taux d'abandon (%) - CP1 - filles,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_abandon_cp1_g,Taux d'abandon (%) - CP1 - garçons,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_abandon_cp1_t,Taux d'abandon (%) - CP1 - ensemble,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_abandon_cp2_f,Taux d'abandon (%) - CP2 - filles,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_abandon_cp2_g,Taux d'abandon (%) - CP2 - garçons,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_abandon_cp2_t,Taux d'abandon (%) - CP2 - ensemble,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_promotion_ce1_f,Taux de promotion (%) - CE1 - filles,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_promotion_ce1_g,Taux de promotion (%) - CE1 - garçons,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_promotion_ce1_t,Taux de promotion (%) - CE1 - ensemble,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_promotion_ce2_f,Taux de promotion (%) - CE2 - filles,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_promotion_ce2_g,Taux de promotion (%) - CE2 - garçons,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_promotion_ce2_t,Taux de promotion (%) - CE2 - ensemble,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_promotion_cm1_f,Taux de promotion (%) - CM1 - filles,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_promotion_cm1_g,Taux de promotion (%) - CM1 - garçons,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_promotion_cm1_t,Taux de promotion (%) - CM1 - ensemble,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_promotion_cp1_f,Taux de promotion (%) - CP1 - filles,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_promotion_cp1_g,Taux de promotion (%) - CP1 - garçons,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_promotion_cp1_t,Taux de promotion (%) - CP1 - ensemble,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_promotion_cp2_f,Taux de promotion (%) - CP2 - filles,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_promotion_cp2_g,Taux de promotion (%) - CP2 - garçons,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_promotion_cp2_t,Taux de promotion (%) - CP2 - ensemble,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_redoublement_ce1_f,Taux de redoublement (%) - CE1 - filles,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_redoublement_ce1_g,Taux de redoublement (%) - CE1 - garçons,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_redoublement_ce1_t,Taux de redoublement (%) - CE1 - ensemble,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_redoublement_ce2_f,Taux de redoublement (%) - CE2 - filles,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_redoublement_ce2_g,Taux de redoublement (%) - CE2 - garçons,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_redoublement_ce2_t,Taux de redoublement (%) - CE2 - ensemble,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_redoublement_cm1_f,Taux de redoublement (%) - CM1 - filles,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_redoublement_cm1_g,Taux de redoublement (%) - CM1 - garçons,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_redoublement_cm1_t,Taux de redoublement (%) - CM1 - ensemble,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_redoublement_cm2_f,Taux de redoublement (%) - CM2 - filles,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_redoublement_cm2_g,Taux de redoublement (%) - CM2 - garçons,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_redoublement_cm2_t,Taux de redoublement (%) - CM2 - ensemble,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_redoublement_cp1_f,Taux de redoublement (%) - CP1 - filles,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_redoublement_cp1_g,Taux de redoublement (%) - CP1 - garçons,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_redoublement_cp1_t,Taux de redoublement (%) - CP1 - ensemble,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_redoublement_cp2_f,Taux de redoublement (%) - CP2 - filles,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_redoublement_cp2_g,Taux de redoublement (%) - CP2 - garçons,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_redoublement_cp2_t,Taux de redoublement (%) - CP2 - ensemble,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_promotion_moy_g,Taux de promotion (%) - moyenne simple des niveaux - garçons,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_promotion_moy_f,Taux de promotion (%) - moyenne simple des niveaux - filles,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_promotion_moy_t,Taux de promotion (%) - moyenne simple des niveaux - ensemble,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_redoublement_moy_g,Taux de redoublement (%) - moyenne simple des niveaux - garçons,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_redoublement_moy_f,Taux de redoublement (%) - moyenne simple des niveaux - filles,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_redoublement_moy_t,Taux de redoublement (%) - moyenne simple des niveaux - ensemble,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_abandon_moy_g,Taux d'abandon (%) - moyenne simple des niveaux - garçons,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_abandon_moy_f,Taux d'abandon (%) - moyenne simple des niveaux - filles,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_abandon_moy_t,Taux d'abandon (%) - moyenne simple des niveaux - ensemble,100%,"Annuaire statistique du primaire, tableau I.7 (DGESS)"
+prim_flux_origine,Origine des taux de flux : publie (ligne régionale de l'annuaire) ou estime_provinces,100%,Calcul
+prim_salles_prive,Nombre de salles de classe - prive (primaire),100%,"Annuaire statistique du primaire, tableau I.1 (DGESS)"
+prim_salles_public,Nombre de salles de classe - public (primaire),100%,"Annuaire statistique du primaire, tableau I.1 (DGESS)"
+prim_salles_total,Nombre de salles de classe - total (primaire),100%,"Annuaire statistique du primaire, tableau I.1 (DGESS)"
+prim_groupes_ped_prive,Nombre de groupes pédagogiques - prive (primaire),100%,"Annuaire statistique du primaire, tableau I.1 (DGESS)"
+prim_groupes_ped_public,Nombre de groupes pédagogiques - public (primaire),100%,"Annuaire statistique du primaire, tableau I.1 (DGESS)"
+prim_groupes_ped_total,Nombre de groupes pédagogiques - total (primaire),100%,"Annuaire statistique du primaire, tableau I.1 (DGESS)"
+prim_maitres_prive,Nombre de maîtres chargés de cours - prive (primaire),100%,"Annuaire statistique du primaire, tableau I.1 (DGESS)"
+prim_maitres_public,Nombre de maîtres chargés de cours - public (primaire),100%,"Annuaire statistique du primaire, tableau I.1 (DGESS)"
+prim_maitres_total,Nombre de maîtres chargés de cours - total (primaire),100%,"Annuaire statistique du primaire, tableau I.1 (DGESS)"
+prim_ratio_eleves_maitre_prive,Ratio élèves/maître - prive (primaire),100%,"Annuaire statistique du primaire, tableau I.1 (DGESS)"
+prim_ratio_eleves_maitre_public,Ratio élèves/maître - public (primaire),100%,"Annuaire statistique du primaire, tableau I.1 (DGESS)"
+prim_ratio_eleves_maitre_total,Ratio élèves/maître - total (primaire),100%,"Annuaire statistique du primaire, tableau I.1 (DGESS)"
+prim_eleves_par_salle,Élèves par salle de classe (effectif DCB / salles annuaire),100%,Calcul
+prim_pct_ecoles_eau_potable,"Écoles disposant d'eau potable (% des écoles, public + privé)",100%,"Annuaire statistique du primaire, tableau V.4.3 (DGESS)"
+prim_pct_ecoles_electricite,"Écoles disposant d'électricité (% des écoles, public + privé)",100%,"Annuaire statistique du primaire, tableau V.4.3 (DGESS)"
+prim_pct_ecoles_latrines,"Écoles disposant de latrines fonctionnelles (% des écoles, public + privé)",100%,"Annuaire statistique du primaire, tableau V.4.3 (DGESS)"
+prim_pct_ecoles_jardin,"Écoles disposant d'un jardin scolaire (% des écoles, public + privé)",100%,"Annuaire statistique du primaire, tableau V.4.3 (DGESS)"
+prim_pct_ecoles_cantine,"Écoles disposant d'une cantine (% des écoles, public + privé)",100%,"Annuaire statistique du primaire, tableau V.4.3 (DGESS)"
+prim_pct_ecoles_terrain_sport,"Écoles disposant d'un terrain de sport (% des écoles, public + privé)",100%,"Annuaire statistique du primaire, tableau V.4.3 (DGESS)"
+prim_pct_ecoles_cloture,"Écoles disposant d'une clôture (% des écoles, public + privé)",100%,"Annuaire statistique du primaire, tableau V.4.3 (DGESS)"
+prim_enseignants_total,Enseignants du primaire (ensemble),90%,"INSD, portail open data"
+prim_pct_enseignantes,Part de femmes parmi les enseignants du primaire (%),90%,"INSD, portail open data"
+pop_hommes,Population masculine en milieu d'année,90%,"INSD, portail open data"
+pop_femmes,Population féminine en milieu d'année,90%,"INSD, portail open data"
+pop_totale,Population totale en milieu d'année,90%,"INSD, portail open data"

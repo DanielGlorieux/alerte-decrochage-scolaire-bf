@@ -1,0 +1,12 @@
+facteur,dimension,sens,libelle
+ratio_eleves_maitre,Conditions d'enseignement,1,Élèves par maître
+eleves_par_salle,Conditions d'enseignement,1,Élèves par salle de classe
+pct_ecoles_eau,Équipements,-1,Écoles avec eau potable (%)
+pct_ecoles_latrines,Équipements,-1,Écoles avec latrines fonctionnelles (%)
+pct_ecoles_cantine,Équipements,-1,Écoles avec cantine (%)
+pct_ecoles_electricite,Équipements,-1,Écoles avec électricité (%)
+ecart_parite_tbs,Écarts filles-garçons,1,Écart à la parité du TBS (|1 - IPS|)
+ecart_parite_tap,Écarts filles-garçons,1,Écart à la parité de l'achèvement (|1 - IPS|)
+tbs,Accès et continuité,-1,Taux brut de scolarisation (%)
+tba,Accès et continuité,-1,Taux brut d'admission (%)
+var_ecoles_pct,Accès et continuité,-1,Variation annuelle du nombre d'écoles (%)

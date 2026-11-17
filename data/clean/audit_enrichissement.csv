@@ -1,0 +1,14 @@
+controle,gravite,cle,detail
+province sans effectif (pondération),avertissement,"(2023, 'KOMANDJARI')",
+province sans effectif (pondération),avertissement,"(2024, 'KOMANDJARI')",
+province sans effectif (pondération),avertissement,"(2025, 'KOMANDJARI')",
+taux régionaux estimés par les provinces : erreur mesurée,info,éditions 2018/19 à 2024/25,écart absolu moyen 0.89 pt ; médian 0.10 ; 95e centile 4.60
+annuaire I.1 différent de DCB (élèves),avertissement,"('BOUCLE DU MOUHOUN', 2018)",annuaire=303741 ; DCB=303700
+annuaire I.1 différent de DCB (élèves),avertissement,"('NATIONAL', 2018)",annuaire=3206060 ; DCB=3206019
+redoublement annuaire / API INSD,info,décalage +0,56% identiques sur 2268
+redoublement annuaire / API INSD,info,décalage -1,5% identiques sur 2268
+variable enrichie incomplète,info,prim_enseignants_total,14 manquants ; années : [np.int64(2025)]
+variable enrichie incomplète,info,prim_pct_enseignantes,14 manquants ; années : [np.int64(2025)]
+variable enrichie incomplète,info,pop_hommes,14 manquants ; années : [np.int64(2025)]
+variable enrichie incomplète,info,pop_femmes,14 manquants ; années : [np.int64(2025)]
+variable enrichie incomplète,info,pop_totale,14 manquants ; années : [np.int64(2025)]

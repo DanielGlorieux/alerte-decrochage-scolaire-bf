@@ -1,0 +1,26 @@
+# Ancien projet (données de cohorte santé) : sans rapport avec le hackathon, ne pas versionner
+AnalyseL3/
+
+# Sources officielles téléchargées (≈ 500 Mo de PDF) : se retéléchargent avec scripts/02_telecharger_sources.py
+# Exception : le journal des URL, utile pour la traçabilité
+data/externe/brut/*
+!data/externe/brut/_manifest_telechargements.tsv
+
+# Texte extrait des annuaires PDF : régénéré par scripts/03_enrichir_base.py
+data/externe/texte/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Streamlit / éditeurs / système
+.streamlit/secrets.toml
+.ipynb_checkpoints/
+.vscode/
+.idea/
+.DS_Store
+
+# État local de l'outil d'orchestration
+.omc/

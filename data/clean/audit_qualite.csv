@@ -1,0 +1,181 @@
+controle,gravite,cle,detail
+IPS = taux F / taux G,avertissement,"('prescolaire', 'ips_tbs', 'CENTRE', np.int64(2020))",publié=1.000 ; recalculé=0.911
+valeur manquante,info,"('presco_salles_communautaire', 'NATIONAL', np.int64(2016))",
+valeur manquante,info,"('presco_salles_communautaire', 'NATIONAL', np.int64(2017))",
+valeur manquante,info,"('presco_salles_communautaire', 'NATIONAL', np.int64(2018))",
+valeur manquante,info,"('presco_salles_communautaire', 'NATIONAL', np.int64(2019))",
+valeur manquante,info,"('presco_salles_communautaire', 'NATIONAL', np.int64(2020))",
+valeur manquante,info,"('presco_salles_communautaire', 'NATIONAL', np.int64(2021))",
+valeur manquante,info,"('presco_salles_communautaire', 'NATIONAL', np.int64(2022))",
+valeur manquante,info,"('presco_salles_communautaire', 'NATIONAL', np.int64(2023))",
+valeur manquante,info,"('presco_salles_communautaire', 'NATIONAL', np.int64(2024))",
+valeur manquante,info,"('presco_salles_communautaire', 'NATIONAL', np.int64(2025))",
+valeur manquante,info,"('presco_salles_prive', 'NATIONAL', np.int64(2016))",
+valeur manquante,info,"('presco_salles_prive', 'NATIONAL', np.int64(2017))",
+valeur manquante,info,"('presco_salles_prive', 'NATIONAL', np.int64(2018))",
+valeur manquante,info,"('presco_salles_prive', 'NATIONAL', np.int64(2019))",
+valeur manquante,info,"('presco_salles_prive', 'NATIONAL', np.int64(2020))",
+valeur manquante,info,"('presco_salles_prive', 'NATIONAL', np.int64(2021))",
+valeur manquante,info,"('presco_salles_prive', 'NATIONAL', np.int64(2022))",
+valeur manquante,info,"('presco_salles_prive', 'NATIONAL', np.int64(2023))",
+valeur manquante,info,"('presco_salles_prive', 'NATIONAL', np.int64(2024))",
+valeur manquante,info,"('presco_salles_prive', 'NATIONAL', np.int64(2025))",
+valeur manquante,info,"('presco_salles_public', 'NATIONAL', np.int64(2016))",
+valeur manquante,info,"('presco_salles_public', 'NATIONAL', np.int64(2017))",
+valeur manquante,info,"('presco_salles_public', 'NATIONAL', np.int64(2018))",
+valeur manquante,info,"('presco_salles_public', 'NATIONAL', np.int64(2019))",
+valeur manquante,info,"('presco_salles_public', 'NATIONAL', np.int64(2020))",
+valeur manquante,info,"('presco_salles_public', 'NATIONAL', np.int64(2021))",
+valeur manquante,info,"('presco_salles_public', 'NATIONAL', np.int64(2022))",
+valeur manquante,info,"('presco_salles_public', 'NATIONAL', np.int64(2023))",
+valeur manquante,info,"('presco_salles_public', 'NATIONAL', np.int64(2024))",
+valeur manquante,info,"('presco_salles_public', 'NATIONAL', np.int64(2025))",
+valeur manquante,info,"('presco_structures_communautaire', 'NATIONAL', np.int64(2016))",
+valeur manquante,info,"('presco_structures_communautaire', 'NATIONAL', np.int64(2017))",
+valeur manquante,info,"('presco_structures_communautaire', 'NATIONAL', np.int64(2018))",
+valeur manquante,info,"('presco_structures_communautaire', 'NATIONAL', np.int64(2019))",
+valeur manquante,info,"('presco_structures_communautaire', 'NATIONAL', np.int64(2020))",
+valeur manquante,info,"('presco_structures_communautaire', 'NATIONAL', np.int64(2021))",
+valeur manquante,info,"('presco_structures_communautaire', 'NATIONAL', np.int64(2022))",
+valeur manquante,info,"('presco_structures_communautaire', 'NATIONAL', np.int64(2023))",
+valeur manquante,info,"('presco_structures_communautaire', 'NATIONAL', np.int64(2024))",
+valeur manquante,info,"('presco_structures_communautaire', 'NATIONAL', np.int64(2025))",
+valeur manquante,info,"('presco_structures_prive', 'NATIONAL', np.int64(2016))",
+valeur manquante,info,"('presco_structures_prive', 'NATIONAL', np.int64(2017))",
+valeur manquante,info,"('presco_structures_prive', 'NATIONAL', np.int64(2018))",
+valeur manquante,info,"('presco_structures_prive', 'NATIONAL', np.int64(2019))",
+valeur manquante,info,"('presco_structures_prive', 'NATIONAL', np.int64(2020))",
+valeur manquante,info,"('presco_structures_prive', 'NATIONAL', np.int64(2021))",
+valeur manquante,info,"('presco_structures_prive', 'NATIONAL', np.int64(2022))",
+valeur manquante,info,"('presco_structures_prive', 'NATIONAL', np.int64(2023))",
+valeur manquante,info,"('presco_structures_prive', 'NATIONAL', np.int64(2024))",
+valeur manquante,info,"('presco_structures_prive', 'NATIONAL', np.int64(2025))",
+valeur manquante,info,"('presco_structures_public', 'NATIONAL', np.int64(2016))",
+valeur manquante,info,"('presco_structures_public', 'NATIONAL', np.int64(2017))",
+valeur manquante,info,"('presco_structures_public', 'NATIONAL', np.int64(2018))",
+valeur manquante,info,"('presco_structures_public', 'NATIONAL', np.int64(2019))",
+valeur manquante,info,"('presco_structures_public', 'NATIONAL', np.int64(2020))",
+valeur manquante,info,"('presco_structures_public', 'NATIONAL', np.int64(2021))",
+valeur manquante,info,"('presco_structures_public', 'NATIONAL', np.int64(2022))",
+valeur manquante,info,"('presco_structures_public', 'NATIONAL', np.int64(2023))",
+valeur manquante,info,"('presco_structures_public', 'NATIONAL', np.int64(2024))",
+valeur manquante,info,"('presco_structures_public', 'NATIONAL', np.int64(2025))",
+taux G = F = T strictement identiques,avertissement,"('primaire', 'tba', 'CENTRE-OUEST', 2016)",valeur=112.2
+taux G = F = T strictement identiques,avertissement,"('primaire', 'tba', 'SAHEL', 2019)",valeur=36.3
+taux > 100 %,avertissement,"('primaire', 'tap', 'CENTRE', 'F', 2023)",valeur=101.2192225477
+taux > 100 %,avertissement,"('primaire', 'tap', 'CENTRE', 'F', 2024)",valeur=102.592431935904
+variation annuelle > 50 %,avertissement,"('prescolaire', 'salles', 'CENTRE-EST', 'prive', 'total', 'total', 2017)",42 -> 66 (+57%) [PRESCOLAIRE!D163]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'effectif', 'CENTRE-SUD', 'total', 'total', 'total', 2017)",2435 -> 925 (-62%) [PRESCOLAIRE!G10]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'structures', 'CENTRE', 'prive', 'total', 'total', 2017)",209 -> 372 (+78%) [PRESCOLAIRE!D102]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'effectif', 'CENTRE', 'total', 'total', 'total', 2017)",18857 -> 28615 (+52%) [PRESCOLAIRE!G6]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'structures', 'CENTRE', 'total', 'total', 'total', 2017)",232 -> 415 (+79%) [PRESCOLAIRE!D104]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'structures', 'CENTRE', 'public', 'total', 'total', 2017)",21 -> 40 (+90%) [PRESCOLAIRE!D101]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'salles', 'PLATEAU CENTRAL', 'prive', 'total', 'total', 2017)",20 -> 40 (+100%) [PRESCOLAIRE!D191]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'structures', 'CENTRE-SUD', 'communautaire', 'total', 'total', 2017)",52 -> 2 (-96%) [PRESCOLAIRE!D119]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'salles', 'HAUTS-BASSINS', 'total', 'total', 'total', 2017)",54 -> 242 (+348%) [PRESCOLAIRE!D185]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'salles', 'NORD', 'prive', 'total', 'total', 2017)",31 -> 53 (+71%) [PRESCOLAIRE!D187]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'structures', 'CENTRE-SUD', 'total', 'total', 'total', 2017)",68 -> 15 (-78%) [PRESCOLAIRE!D120]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'structures', 'EST', 'communautaire', 'total', 'total', 2017)",20 -> 2 (-90%) [PRESCOLAIRE!D123]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'structures', 'HAUTS-BASSINS', 'communautaire', 'total', 'total', 2017)",28 -> 12 (-57%) [PRESCOLAIRE!D127]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'salles', 'EST', 'communautaire', 'total', 'total', 2017)",27 -> 3 (-89%) [PRESCOLAIRE!D180]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'salles', 'CENTRE-SUD', 'total', 'total', 'total', 2017)",142 -> 30 (-79%) [PRESCOLAIRE!D177]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'structures', 'HAUTS-BASSINS', 'total', 'total', 'total', 2017)",33 -> 133 (+303%) [PRESCOLAIRE!D128]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'salles', 'CENTRE-SUD', 'prive', 'total', 'total', 2017)",30 -> 11 (-63%) [PRESCOLAIRE!D175]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'salles', 'CENTRE-OUEST', 'prive', 'total', 'total', 2017)",32 -> 63 (+97%) [PRESCOLAIRE!D171]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'salles', 'CENTRE-SUD', 'communautaire', 'total', 'total', 2017)",104 -> 4 (-96%) [PRESCOLAIRE!D176]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'salles', 'CENTRE-OUEST', 'total', 'total', 'total', 2017)",86 -> 138 (+60%) [PRESCOLAIRE!D173]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'salles', 'CENTRE', 'public', 'total', 'total', 2017)",70 -> 117 (+67%) [PRESCOLAIRE!D158]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'salles', 'CENTRE', 'prive', 'total', 'total', 2017)",549 -> 853 (+55%) [PRESCOLAIRE!D159]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'salles', 'CENTRE', 'total', 'total', 'total', 2017)",622 -> 978 (+57%) [PRESCOLAIRE!D161]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'salles', 'CENTRE', 'total', 'total', 'total', 2018)",978 -> 1551 (+59%) [PRESCOLAIRE!E161]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'salles', 'CENTRE', 'prive', 'total', 'total', 2018)",853 -> 1372 (+61%) [PRESCOLAIRE!E159]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'salles', 'CENTRE-OUEST', 'communautaire', 'total', 'total', 2018)",56 -> 25 (-55%) [PRESCOLAIRE!E172]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'effectif', 'CENTRE-SUD', 'total', 'total', 'total', 2018)",925 -> 1428 (+54%) [PRESCOLAIRE!J10]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'salles', 'CENTRE-SUD', 'total', 'total', 'total', 2018)",30 -> 48 (+60%) [PRESCOLAIRE!E177]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'salles', 'HAUTS-BASSINS', 'communautaire', 'total', 'total', 2018)",20 -> 6 (-70%) [PRESCOLAIRE!E184]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'salles', 'PLATEAU CENTRAL', 'communautaire', 'total', 'total', 2018)",24 -> 45 (+88%) [PRESCOLAIRE!E192]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'effectif', 'NATIONAL', 'communautaire', 'total', 'petite_section', 2019)",4108 -> 7206 (+75%) [PRESCOLAIRE!N49]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'effectif', 'NATIONAL', 'communautaire', 'total', 'grande_section', 2019)",3116 -> 6627 (+113%) [PRESCOLAIRE!N47]
+variation annuelle > 50 %,avertissement,"('primaire', 'nouveaux_cp1', 'SAHEL', 'total', 'total', 'total', 2019)",34473 -> 16602 (-52%) [Feuil5!F38]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'effectif', 'SAHEL', 'total', 'total', 'total', 2019)",664 -> 2466 (+271%) [PRESCOLAIRE!M15]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'effectif', 'NATIONAL', 'total', 'rural', 'total', 2019)",18679 -> 29237 (+57%) [PRESCOLAIRE!G31]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'salles', 'CENTRE-OUEST', 'communautaire', 'total', 'total', 2019)",25 -> 73 (+192%) [PRESCOLAIRE!F172]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'structures', 'CENTRE-SUD', 'total', 'total', 'total', 2019)",20 -> 55 (+175%) [PRESCOLAIRE!F120]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'structures', 'CENTRE-OUEST', 'total', 'total', 'total', 2019)",49 -> 97 (+98%) [PRESCOLAIRE!F116]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'salles', 'CENTRE-OUEST', 'public', 'total', 'total', 2019)",24 -> 40 (+67%) [PRESCOLAIRE!F170]
+variation annuelle > 50 %,avertissement,"('primaire', 'ecoles', 'SAHEL', 'prive', 'total', 'total', 2019)",95 -> 23 (-76%) [Feuil13!F37]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'salles', 'CENTRE-OUEST', 'prive', 'total', 'total', 2019)",47 -> 82 (+74%) [PRESCOLAIRE!F171]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'structures', 'CENTRE-OUEST', 'communautaire', 'total', 'total', 2019)",20 -> 46 (+130%) [PRESCOLAIRE!F115]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'salles', 'CENTRE-OUEST', 'total', 'total', 'total', 2019)",96 -> 195 (+103%) [PRESCOLAIRE!F173]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'salles', 'CENTRE-SUD', 'total', 'total', 'total', 2019)",48 -> 83 (+73%) [PRESCOLAIRE!F177]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'effectif', 'CENTRE-SUD', 'total', 'total', 'total', 2019)",1428 -> 3775 (+164%) [PRESCOLAIRE!M10]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'effectif', 'CENTRE-OUEST', 'total', 'total', 'total', 2019)",3584 -> 7802 (+118%) [PRESCOLAIRE!M9]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'effectif', 'NATIONAL', 'communautaire', 'total', 'total', 2019)",10497 -> 20052 (+91%) [PRESCOLAIRE!M24]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'effectif', 'NATIONAL', 'communautaire', 'total', 'total', 2019)",10497 -> 20052 (+91%) [PRESCOLAIRE!N50]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'effectif', 'NATIONAL', 'communautaire', 'total', 'moyenne_section', 2019)",3273 -> 6219 (+90%) [PRESCOLAIRE!N48]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'structures', 'BOUCLE DU MOUHOUN', 'prive', 'total', 'total', 2020)",24 -> 7 (-71%) [PRESCOLAIRE!G94]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'structures', 'CENTRE', 'prive', 'total', 'total', 2020)",662 -> 7 (-99%) [PRESCOLAIRE!G102]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'structures', 'CENTRE-EST', 'prive', 'total', 'total', 2020)",24 -> 37 (+54%) [PRESCOLAIRE!G106]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'structures', 'HAUTS-BASSINS', 'prive', 'total', 'total', 2020)",70 -> 13 (-81%) [PRESCOLAIRE!G126]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'structures', 'CENTRE-NORD', 'prive', 'total', 'total', 2020)",20 -> 53 (+165%) [PRESCOLAIRE!G110]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'structures', 'CENTRE-NORD', 'communautaire', 'total', 'total', 2020)",81 -> 25 (-69%) [PRESCOLAIRE!G111]
+variation annuelle > 50 %,avertissement,"('primaire', 'ecoles', 'SAHEL', 'prive', 'total', 'total', 2020)",23 -> 35 (+52%) [Feuil13!G37]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'structures', 'CENTRE-OUEST', 'prive', 'total', 'total', 2020)",34 -> 53 (+56%) [PRESCOLAIRE!G114]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'structures', 'CENTRE-SUD', 'communautaire', 'total', 'total', 2020)",40 -> 14 (-65%) [PRESCOLAIRE!G119]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'structures', 'CENTRE-SUD', 'prive', 'total', 'total', 2021)",49 -> 17 (-65%) [PRESCOLAIRE!H118]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'structures', 'CENTRE-NORD', 'communautaire', 'total', 'total', 2021)",25 -> 70 (+180%) [PRESCOLAIRE!H111]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'structures', 'CENTRE-NORD', 'prive', 'total', 'total', 2021)",53 -> 24 (-55%) [PRESCOLAIRE!H110]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'structures', 'HAUTS-BASSINS', 'communautaire', 'total', 'total', 2021)",111 -> 18 (-84%) [PRESCOLAIRE!H127]
+variation annuelle > 50 %,avertissement,"('primaire', 'ecoles', 'SUD-OUEST', 'prive', 'total', 'total', 2021)",39 -> 73 (+87%) [Feuil13!H40]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'structures', 'BOUCLE DU MOUHOUN', 'communautaire', 'total', 'total', 2021)",26 -> 12 (-54%) [PRESCOLAIRE!H95]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'structures', 'CENTRE', 'communautaire', 'total', 'total', 2021)",796 -> 6 (-99%) [PRESCOLAIRE!H103]
+variation annuelle > 50 %,avertissement,"('primaire', 'ecoles', 'SUD-OUEST', 'prive', 'total', 'total', 2022)",73 -> 33 (-55%) [Feuil13!I40]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'salles', 'CENTRE-NORD', 'public', 'total', 'total', 2023)",20 -> 31 (+55%) [PRESCOLAIRE!J166]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'effectif', 'NATIONAL', 'total', 'indetermine', 'total', 2023)",975 -> 1541 (+58%) [PRESCOLAIRE!S32]
+variation annuelle > 50 %,avertissement,"('primaire', 'ecoles', 'SUD-OUEST', 'prive', 'total', 'total', 2023)",33 -> 54 (+64%) [Feuil13!J40]
+variation annuelle > 50 %,avertissement,"('primaire', 'nouveaux_cp1', 'SAHEL', 'total', 'total', 'total', 2024)",11677 -> 20610 (+77%) [Feuil5!K38]
+variation annuelle > 50 %,avertissement,"('primaire', 'effectif', 'SAHEL', 'total', 'total', 'total', 2024)",36042 -> 56450 (+57%) [Feuil1!K38]
+variation annuelle > 50 %,avertissement,"('primaire', 'ecoles', 'SAHEL', 'total', 'total', 'total', 2024)",100 -> 170 (+70%) [Feuil13!K38]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'salles', 'CENTRE-SUD', 'public', 'total', 'total', 2024)",21 -> 34 (+62%) [PRESCOLAIRE!K174]
+variation annuelle > 50 %,avertissement,"('primaire', 'ecoles', 'SAHEL', 'public', 'total', 'total', 2024)",75 -> 126 (+68%) [Feuil13!K36]
+variation annuelle > 50 %,avertissement,"('primaire', 'ecoles', 'SAHEL', 'prive', 'total', 'total', 2024)",25 -> 44 (+76%) [Feuil13!K37]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'salles', 'SAHEL', 'total', 'total', 'total', 2024)",20 -> 36 (+80%) [PRESCOLAIRE!K197]
+variation annuelle > 50 %,avertissement,"('primaire', 'nouveaux_cp1', 'BOUCLE DU MOUHOUN', 'total', 'total', 'total', 2024)",29403 -> 48764 (+66%) [Feuil5!K5]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'effectif', 'SAHEL', 'total', 'total', 'total', 2024)",995 -> 1675 (+68%) [PRESCOLAIRE!AB15]
+variation annuelle > 50 %,avertissement,"('primaire', 'nouveaux_cp1', 'EST', 'total', 'total', 'total', 2024)",19215 -> 35678 (+86%) [Feuil5!K26]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'structures', 'SUD-OUEST', 'public', 'total', 'total', 2025)",20 -> 61 (+205%) [PRESCOLAIRE!L141]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'salles', 'BOUCLE DU MOUHOUN', 'public', 'total', 'total', 2025)",43 -> 129 (+200%) [PRESCOLAIRE!L150]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'salles', 'BOUCLE DU MOUHOUN', 'total', 'total', 'total', 2025)",101 -> 193 (+91%) [PRESCOLAIRE!L153]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'structures', 'HAUTS-BASSINS', 'public', 'total', 'total', 2025)",30 -> 77 (+157%) [PRESCOLAIRE!L125]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'salles', 'CENTRE', 'communautaire', 'total', 'total', 2025)",40 -> 11 (-72%) [PRESCOLAIRE!L160]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'effectif', 'SUD-OUEST', 'total', 'total', 'total', 2025)",3742 -> 7658 (+105%) [PRESCOLAIRE!AE16]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'structures', 'HAUTS-BASSINS', 'communautaire', 'total', 'total', 2025)",24 -> 0 (-100%) [PRESCOLAIRE!L127]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'salles', 'CENTRE-EST', 'public', 'total', 'total', 2025)",52 -> 88 (+69%) [PRESCOLAIRE!L162]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'salles', 'CENTRE-NORD', 'communautaire', 'total', 'total', 2025)",61 -> 147 (+141%) [PRESCOLAIRE!L168]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'salles', 'CENTRE-NORD', 'total', 'total', 'total', 2025)",146 -> 305 (+109%) [PRESCOLAIRE!L169]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'effectif', 'NORD', 'total', 'total', 'total', 2025)",4286 -> 11305 (+164%) [PRESCOLAIRE!AE13]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'salles', 'CENTRE-NORD', 'public', 'total', 'total', 2025)",23 -> 76 (+230%) [PRESCOLAIRE!L166]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'salles', 'CENTRE-OUEST', 'public', 'total', 'total', 2025)",104 -> 191 (+84%) [PRESCOLAIRE!L170]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'effectif', 'CENTRE-NORD', 'total', 'total', 'total', 2025)",7042 -> 13292 (+89%) [PRESCOLAIRE!AE8]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'effectif', 'EST', 'total', 'total', 'total', 2025)",3229 -> 5912 (+83%) [PRESCOLAIRE!AE11]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'structures', 'NORD', 'total', 'total', 'total', 2025)",48 -> 114 (+138%) [PRESCOLAIRE!L132]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'salles', 'HAUTS-BASSINS', 'public', 'total', 'total', 2025)",80 -> 142 (+77%) [PRESCOLAIRE!L182]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'salles', 'HAUTS-BASSINS', 'communautaire', 'total', 'total', 2025)",36 -> 0 (-100%) [PRESCOLAIRE!L184]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'effectif', 'BOUCLE DU MOUHOUN', 'total', 'total', 'total', 2025)",4061 -> 11479 (+183%) [PRESCOLAIRE!AE4]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'salles', 'NORD', 'public', 'total', 'total', 2025)",40 -> 108 (+170%) [PRESCOLAIRE!L186]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'salles', 'NORD', 'total', 'total', 'total', 2025)",120 -> 208 (+73%) [PRESCOLAIRE!L189]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'structures', 'CENTRE-OUEST', 'public', 'total', 'total', 2025)",40 -> 121 (+202%) [PRESCOLAIRE!L113]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'salles', 'PLATEAU CENTRAL', 'public', 'total', 'total', 2025)",50 -> 87 (+74%) [PRESCOLAIRE!L190]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'effectif', 'NATIONAL', 'total', 'rural', 'total', 2025)",39923 -> 72763 (+82%) [PRESCOLAIRE!Y31]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'salles', 'SUD-OUEST', 'public', 'total', 'total', 2025)",62 -> 110 (+77%) [PRESCOLAIRE!L198]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'effectif', 'NATIONAL', 'public', 'total', 'total', 2025)",31597 -> 70092 (+122%) [PRESCOLAIRE!AF42]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'effectif', 'NATIONAL', 'public', 'total', 'total', 2025)",31597 -> 70092 (+122%) [PRESCOLAIRE!AE22]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'structures', 'CENTRE-NORD', 'total', 'total', 'total', 2025)",80 -> 162 (+102%) [PRESCOLAIRE!L112]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'effectif', 'NATIONAL', 'public', 'total', 'petite_section', 2025)",9503 -> 28422 (+199%) [PRESCOLAIRE!AF41]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'effectif', 'NATIONAL', 'public', 'total', 'moyenne_section', 2025)",12273 -> 22286 (+82%) [PRESCOLAIRE!AF40]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'structures', 'SUD-OUEST', 'total', 'total', 'total', 2025)",44 -> 87 (+98%) [PRESCOLAIRE!L144]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'structures', 'BOUCLE DU MOUHOUN', 'total', 'total', 'total', 2025)",41 -> 116 (+183%) [PRESCOLAIRE!L96]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'structures', 'CENTRE-NORD', 'communautaire', 'total', 'total', 2025)",45 -> 83 (+84%) [PRESCOLAIRE!L111]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'effectif', 'NATIONAL', 'public', 'total', 'grande_section', 2025)",9821 -> 19384 (+97%) [PRESCOLAIRE!AF39]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'structures', 'CENTRE', 'public', 'total', 'total', 2025)",63 -> 111 (+76%) [PRESCOLAIRE!L101]
+variation annuelle > 50 %,avertissement,"('prescolaire', 'structures', 'CENTRE-EST', 'public', 'total', 'total', 2025)",21 -> 52 (+148%) [PRESCOLAIRE!L105]

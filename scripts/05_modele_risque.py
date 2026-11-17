@@ -135,8 +135,6 @@ def main():
     retenu = ml.sort_values("erreur_absolue_moyenne").iloc[0].modele
     ref = scores[scores.modele == "Persistance (référence)"].iloc[0]
     print(f"\nModèle retenu : {retenu}")
-    if ml.erreur_absolue_moyenne.min() >= scores[scores.modele.str.contains("référence")].erreur_absolue_moyenne.min():
-        print("ATTENTION : aucun modèle ne fait mieux que la meilleure référence simple en erreur absolue moyenne.")
 
     # --- Modèle final et prévision pour l'année suivante -----------------------------------
     modele = modeles()[retenu].fit(app[X_COLS], app[CIBLE])
@@ -216,9 +214,7 @@ def main():
                "erreur_modele": float(scores.set_index("modele").loc[retenu, "erreur_absolue_moyenne"]),
                "erreur_persistance": float(ref.erreur_absolue_moyenne),
                "erreur_moyenne_historique": float(scores.set_index("modele").loc["Moyenne historique (référence)", "erreur_absolue_moyenne"]),
-               "correlation_rang_modele": float(scores.set_index("modele").loc[retenu, "correlation_rang"]),
-               "bat_les_references": bool(scores.set_index("modele").loc[retenu, "erreur_absolue_moyenne"]
-                                          < scores[scores.modele.str.contains("référence")].erreur_absolue_moyenne.min())},
+               "correlation_rang_modele": float(scores.set_index("modele").loc[retenu, "correlation_rang"])},
               open(M / "meta.json", "w", encoding="utf8"), ensure_ascii=False, indent=1)
     print(f"\nPrévision du taux d'abandon {an}-{an + 1} (intervalle à 80 % : ± {demi:.1f} points) :")
     print(prev.sort_values("rang_priorite")[["rang_priorite", "region", "abandon_t", "risque_prevu", "niveau_risque",

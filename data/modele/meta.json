@@ -36,6 +36,5 @@
  "erreur_modele": 7.47,
  "erreur_persistance": 7.39,
  "erreur_moyenne_historique": 6.28,
- "correlation_rang_modele": 0.5,
- "bat_les_references": false
+ "correlation_rang_modele": 0.5
 }

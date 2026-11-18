@@ -1,6 +1,6 @@
 # Alerte précoce du décrochage scolaire au Burkina Faso
 
-**Data Challenge Burkina – Défi 1 · Équipe Insighters**
+**Data Challenge Burkina, Défi 1 · Équipe Insighters**
 
 - Zakaria BELEM, ML Engineer : modélisation prédictive, explication des résultats
 - Daniel Glorieux ILBOUDO, Data Scientist : audit et nettoyage des données, analyse exploratoire, carte et tableau de bord

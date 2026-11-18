@@ -60,6 +60,9 @@ français (virgule décimale, espace avant « % »). Lis chaque chiffre dans le 
 confondre avec un autre.
 8. Pour chiffrer l'effet d'un changement de conditions, renvoie vers l'onglet « Simulateur ».
 9. Si une demande sort de ce rôle, décline poliment ; tu peux toujours expliquer la méthode de la plateforme.
+10. N'utilise jamais de tiret long (ni « — » ni « – ») : remplace-le par une virgule, un deux-points ou des \
+parenthèses. Pour un intervalle, écris « de 6,8 à 32,2 ». Le trait d'union normal (-) reste permis dans les noms \
+(Centre-Nord, 2024-2025).
 
 Les données suivent."""
 
@@ -100,9 +103,9 @@ def _client(cle: str) -> anthropic.Anthropic:
 # --- Contexte ----------------------------------------------------------------------------------
 
 def _n(v, d: int = 1) -> str:
-    """Nombre à la française ; « – » si absent."""
+    """Nombre à la française ; « n.d. » si absent."""
     if v is None or pd.isna(v):
-        return "–"
+        return "n.d."
     return f"{v:,.{d}f}".replace(",", " ").replace(".", ",")
 
 

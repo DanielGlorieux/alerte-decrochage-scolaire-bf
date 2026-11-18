@@ -2,8 +2,8 @@
 Plateforme d'alerte précoce du décrochage scolaire au primaire - Burkina Faso
 Equipe Insighters
 
-Lancement :  streamlit run app/streamlit_app.py
-Données   :  data/modele/ (produites par les scripts 04 et 05)
+Lancement :  streamlit run app/streamlit_app.py   (depuis la racine du dépôt, pour le thème .streamlit/)
+Données   :  data/modele/ (produites par les scripts 04, 05 et 06)
 """
 from io import BytesIO
 from pathlib import Path
@@ -19,18 +19,38 @@ import assistant as aide  # onglet « Assistant » (app/assistant.py)
 
 M = Path(__file__).resolve().parents[1] / "data/modele"
 
-
+# Couleurs : palette validée (bleu = série principale ; orange = risque ; bleu = favorable ; rouge/bleu = variation)
 BLEU, BLEU_CLAIR = "#2a78d6", "#9ec5f4"
 HAUSSE, BAISSE, NEUTRE = "#e34948", "#2a78d6", "#898781"
-ECHELLE = ["#cde2fb", "#86b6ef", "#3987e5", "#1c5cab", "#0d366b"]
+BLEUS = ["#cde2fb", "#86b6ef", "#3987e5", "#1c5cab", "#0d366b"]
+ORANGES = ["#fde4d6", "#f6a077", "#eb6834", "#b8461a", "#6f2a0d"]
+DIVERGENTE = [[0, "#b8312f"], [0.5, "#f0efec"], [1, "#184f95"]]
 NIVEAUX = {"faible": ("#0ca30c", "●"), "modéré": ("#fab219", "▲"), "élevé": ("#ec835a", "◆"), "très élevé": ("#d03b3b", "■")}
-GRILLE, ENCRE = "#e1e0d9", "#52514e"
-DECALAGES = {"PLATEAU CENTRAL": (0.25, 0.0)}
-ETIQUETTES = {"BOUCLE DU MOUHOUN": "Boucle du<br>Mouhoun", "PLATEAU CENTRAL": "Plateau<br>Central",
+SURFACE, GRILLE, AXE, ENCRE, ATTENUE = "#fcfcfb", "#e1e0d9", "#c3c2b7", "#52514e", "#898781"
+POLICE = "system-ui, -apple-system, 'Segoe UI', sans-serif"
+
+# Noms affichés des régions (les données les donnent en majuscules)
+NOMS = {"BOUCLE DU MOUHOUN": "Boucle du Mouhoun", "CASCADES": "Cascades", "CENTRE": "Centre", "CENTRE-EST": "Centre-Est",
+        "CENTRE-NORD": "Centre-Nord", "CENTRE-OUEST": "Centre-Ouest", "CENTRE-SUD": "Centre-Sud", "EST": "Est",
+        "HAUTS-BASSINS": "Hauts-Bassins", "NORD": "Nord", "PLATEAU CENTRAL": "Plateau-Central", "SAHEL": "Sahel",
+        "SUD-OUEST": "Sud-Ouest", "NATIONAL": "National"}
+ETIQUETTES = {"BOUCLE DU MOUHOUN": "Boucle du<br>Mouhoun", "PLATEAU CENTRAL": "Plateau-<br>Central",
               "HAUTS-BASSINS": "Hauts-<br>Bassins", "CENTRE-OUEST": "Centre-<br>Ouest", "CENTRE-SUD": "Centre-<br>Sud",
               "CENTRE-NORD": "Centre-<br>Nord", "CENTRE-EST": "Centre-<br>Est"}
+DECALAGES = {"PLATEAU CENTRAL": (0.2, 0.28), "CENTRE": (-0.05, -0.1)}  # le Centre est petit et collé au Plateau-Central
 
-st.set_page_config(page_title="Alerte décrochage scolaire - Burkina Faso", layout="wide")
+st.set_page_config(page_title="Alerte décrochage scolaire - Burkina Faso", page_icon=":material/school:", layout="wide")
+
+
+def joli(region: str) -> str:
+    return NOMS.get(region, region.title())
+
+
+def fr(v, d: int = 1) -> str:
+    """Nombre à la française : virgule décimale, espace fine pour les milliers ; « n.d. » si absent."""
+    if v is None or pd.isna(v):
+        return "n.d."
+    return f"{v:,.{d}f}".replace(",", " ").replace(".", ",")
 
 
 @st.cache_data
@@ -58,20 +78,39 @@ def charger_variables_modele():
     return pd.read_csv(M / "variables_modele.csv")
 
 
+@st.cache_data
+def etendue(_geo, marge: float = 0.12):
+    """Étendue du pays : la carte est cadrée sur le pays, sans la zone carrée que garde fitbounds."""
+    lon, lat = [], []
+    for f in _geo["features"]:
+        g = f["geometry"]
+        polygones = [g["coordinates"]] if g["type"] == "Polygon" else g["coordinates"]
+        for p in polygones:
+            lon += [x for x, _ in p[0]]
+            lat += [y for _, y in p[0]]
+    return [min(lon) - marge, max(lon) + marge], [min(lat) - marge, max(lat) + marge]
+
+
 ind, prev, shap, val, valp, profils, meta, geo, definition = charger()
 modele = charger_modele()
 VARS = meta["variables"]
 regions = ind[ind.code_region != "BF"]
+national = ind[ind.code_region == "BF"].sort_values("annee_fin")
 AN_PREVU, AN_DONNEES = meta["annee_prevue"], meta["annee_donnees"]
 
 
 def mise_en_forme(fig, hauteur=380, titre_y=None, titre_x=None):
     fig.update_layout(height=hauteur, margin=dict(l=10, r=10, t=30, b=10), plot_bgcolor="rgba(0,0,0,0)",
-                      paper_bgcolor="rgba(0,0,0,0)", font=dict(size=13), hoverlabel=dict(font_size=13),
+                      paper_bgcolor="rgba(0,0,0,0)", font=dict(size=13, family=POLICE, color=ENCRE),
+                      hoverlabel=dict(font_size=13, bgcolor="white", bordercolor=GRILLE), separators=", ",
                       legend=dict(orientation="h", y=1.12, x=0))
-    fig.update_xaxes(showgrid=False, title=titre_x, linecolor="#c3c2b7")
-    fig.update_yaxes(gridcolor=GRILLE, title=titre_y, zeroline=False)
+    fig.update_xaxes(showgrid=False, title=titre_x, linecolor=AXE, automargin=True, tickfont=dict(color=ATTENUE))
+    fig.update_yaxes(gridcolor=GRILLE, title=titre_y, zeroline=False, automargin=True, tickfont=dict(color=ATTENUE))
     return fig
+
+
+def afficher(fig):
+    st.plotly_chart(fig, width="stretch", config={"displayModeBar": False})
 
 
 def pastille(niveau):
@@ -80,8 +119,22 @@ def pastille(niveau):
 
 
 st.title("Alerte précoce du décrochage scolaire au primaire")
-st.caption(f"Burkina Faso, 13 régions. Données {ind.annee_scolaire.min()} à {AN_DONNEES} ; risque estimé pour {AN_PREVU}. "
-           "Sources : données du Data Challenge Burkina, annuaires statistiques de l'enseignement primaire (DGESS).")
+st.caption(f"Burkina Faso, 13 régions. Données {ind.annee_scolaire.min()} à {AN_DONNEES} ; risque estimé pour {AN_PREVU}, "
+           "en l'absence de nouveau choc. Sources : données du Data Challenge Burkina, annuaires statistiques de "
+           "l'enseignement primaire (DGESS), INSD.")
+
+# Chiffres clés nationaux
+nat, nat_prec = national.iloc[-1], national.iloc[-2]
+k1, k2, k3, k4 = st.columns(4)
+k1.metric(f"Abandon au primaire, national {AN_DONNEES}", f"{fr(nat.abandon_t)} %",
+          f"{fr(nat.abandon_t - nat_prec.abandon_t)} pt sur un an", delta_color="inverse",
+          help="Taux d'abandon moyen du CP1 au CM1. Les années de fermetures d'écoles le font bondir.")
+k2.metric(f"Achèvement du primaire, national {AN_DONNEES}", f"{fr(nat.achevement_t)} %",
+          f"{fr(nat.achevement_t - nat_prec.achevement_t)} pt sur un an")
+n_eleve = int(prev.niveau_risque.isin(["élevé", "très élevé"]).sum())
+k3.metric(f"Régions à risque élevé ou très élevé en {AN_PREVU}", f"{n_eleve} sur 13")
+k4.metric("Précision des prévisions", f"± {fr(meta['demi_intervalle_80'])} pt",
+          help="Fourchette à 80 % tirée des erreurs passées du modèle, hors années de choc.")
 
 carte, fiche, priorites, simulateur, assistant, methode = st.tabs(
     ["Carte des risques", "Fiche par région", "Régions prioritaires", "Simulateur", "Assistant", "Méthode et limites"])
@@ -90,18 +143,19 @@ carte, fiche, priorites, simulateur, assistant, methode = st.tabs(
 # 1. Carte
 # =========================================================================================
 with carte:
+    # libellé -> (source, colonne, sens) ; sens : « risque » (orange), « favorable » (bleu), « variation » (rouge/bleu)
     choix = {
-        f"Risque estimé pour {AN_PREVU} (taux d'abandon prévu, %)": ("prev", "risque_prevu"),
-        "Indice composite de risque (0 à 100)": ("ind", "indice_risque"),
-        "Taux d'abandon observé (%)": ("ind", "abandon_t"),
-        "Taux d'achèvement du primaire (%)": ("ind", "achevement_t"),
-        "Élèves par maître": ("ind", "ratio_eleves_maitre"),
-        "Écoles avec eau potable (%)": ("ind", "pct_ecoles_eau"),
-        "Variation annuelle du nombre d'écoles (%)": ("ind", "var_ecoles_pct"),
+        f"Risque estimé pour {AN_PREVU} (taux d'abandon prévu, %)": ("prev", "risque_prevu", "risque"),
+        "Indice composite de risque (0 à 100)": ("ind", "indice_risque", "risque"),
+        "Taux d'abandon observé (%)": ("ind", "abandon_t", "risque"),
+        "Taux d'achèvement du primaire (%)": ("ind", "achevement_t", "favorable"),
+        "Élèves par maître": ("ind", "ratio_eleves_maitre", "risque"),
+        "Écoles avec eau potable (%)": ("ind", "pct_ecoles_eau", "favorable"),
+        "Variation annuelle du nombre d'écoles (%)": ("ind", "var_ecoles_pct", "variation"),
     }
-    g, dte = st.columns([3, 1])
+    g, dte = st.columns([3, 2], vertical_alignment="bottom")
     libelle = g.selectbox("Indicateur affiché", list(choix))
-    source, col = choix[libelle]
+    source, col, sens = choix[libelle]
     if source == "prev":
         donnees, annee = prev, AN_PREVU
         dte.markdown(f"**Année** : {AN_PREVU} (prévision)")
@@ -110,92 +164,108 @@ with carte:
         annee = dte.select_slider("Année scolaire", annees, value=annees[-1])
         donnees = regions[regions.annee_scolaire == annee]
     donnees = donnees.dropna(subset=[col])
-    gauche, droite = st.columns([3, 2])
+
+    gauche, droite = st.columns([2, 1], gap="medium")
     with gauche:
+        if sens == "variation":
+            borne = float(donnees[col].abs().max()) or 1
+            echelle, zmin, zmax = DIVERGENTE, -borne, borne
+        else:
+            echelle = [[i / 4, c] for i, c in enumerate(ORANGES if sens == "risque" else BLEUS)]
+            zmin, zmax = float(donnees[col].min()), float(donnees[col].max())
         fig = go.Figure(go.Choropleth(
             geojson=geo, featureidkey="properties.code_region", locations=donnees.code_region, z=donnees[col],
-            text=donnees.region.str.title(), colorscale=[[i / 4, c] for i, c in enumerate(ECHELLE)],
-            marker_line_color="#fcfcfb", marker_line_width=2, colorbar=dict(title="", thickness=12, len=0.7),
-            hovertemplate="<b>%{text}</b><br>%{z:.1f}<extra></extra>"))
+            zmin=zmin, zmax=zmax, text=donnees.region.map(joli), customdata=donnees[col].map(fr), colorscale=echelle,
+            marker_line_color=SURFACE, marker_line_width=2,
+            colorbar=dict(orientation="h", x=0.5, xanchor="center", y=1.0, yanchor="bottom", len=0.6, thickness=10,
+                          outlinewidth=0, tickfont=dict(color=ATTENUE)),
+            hovertemplate="<b>%{text}</b><br>%{customdata}<extra></extra>"))
         # étiquettes : nom de la région et valeur, encre claire sur les teintes foncées
         et = pd.DataFrame([f["properties"] for f in geo["features"]]).merge(donnees[["code_region", col]], on="code_region")
         et["lon_etiquette"] += et.region.map(lambda r: DECALAGES.get(r, (0, 0))[0])
         et["lat_etiquette"] += et.region.map(lambda r: DECALAGES.get(r, (0, 0))[1])
-        etendue = (et[col].max() - et[col].min()) or 1
-        et["fonce"] = (et[col] - et[col].min()) / etendue > 0.5
-        et["texte"] = [ETIQUETTES.get(r, r.title()) + f"<br>{v:.1f}" for r, v in zip(et.region, et[col])]
+        if sens == "variation":
+            et["fonce"] = et[col].abs() / borne > 0.55
+        else:
+            et["fonce"] = (et[col] - zmin) / ((zmax - zmin) or 1) > 0.5
+        et["texte"] = [ETIQUETTES.get(r, joli(r)) + f"<br>{fr(v)}" for r, v in zip(et.region, et[col])]
         for fonce, encre in [(False, "#0b0b0b"), (True, "#ffffff")]:
             e = et[et.fonce == fonce]
             fig.add_scattergeo(lon=e.lon_etiquette, lat=e.lat_etiquette, text=e.texte, mode="text",
-                               textfont=dict(size=10, color=encre), hoverinfo="skip", showlegend=False)
-        fig.update_geos(fitbounds="locations", visible=False, bgcolor="rgba(0,0,0,0)")
-        fig.update_layout(height=470, margin=dict(l=0, r=0, t=0, b=0), paper_bgcolor="rgba(0,0,0,0)")
-        st.plotly_chart(fig, width="stretch")
-        st.caption("Teinte plus foncée = valeur plus élevée (pas forcément plus défavorable : voir l'indicateur choisi).")
+                               textfont=dict(size=11, color=encre, family=POLICE), hoverinfo="skip", showlegend=False)
+        lon, lat = etendue(geo)
+        fig.update_geos(visible=False, bgcolor="rgba(0,0,0,0)", projection_type="mercator",
+                        lonaxis_range=lon, lataxis_range=lat, domain=dict(x=[0, 1], y=[0, 1]))
+        fig.update_layout(height=540, margin=dict(l=0, r=0, t=56, b=0), paper_bgcolor="rgba(0,0,0,0)",
+                          separators=", ", font=dict(family=POLICE))
+        afficher(fig)
+        st.caption({"risque": "Orange : plus la teinte est foncée, plus le risque est élevé.",
+                    "favorable": "Bleu : plus la teinte est foncée, plus la situation est favorable.",
+                    "variation": "Rouge : écoles fermées dans l'année ; bleu : écoles ouvertes."}[sens])
     with droite:
         tri = donnees.sort_values(col)
-        fig = go.Figure(go.Bar(x=tri[col], y=tri.region.str.title(), orientation="h", marker_color=BLEU,
-                               text=tri[col].round(1), textposition="outside", cliponaxis=False,
+        fig = go.Figure(go.Bar(x=tri[col], y=tri.region.map(joli), orientation="h", marker=dict(color=BLEU, cornerradius=4),
+                               width=0.62, texttemplate="%{x:.1f}", textposition="outside", cliponaxis=False,
                                hovertemplate="<b>%{y}</b> : %{x:.1f}<extra></extra>"))
-        mise_en_forme(fig, 470)
+        mise_en_forme(fig, 540).update_layout(margin=dict(r=45))
         fig.update_xaxes(showticklabels=False)
-        fig.update_yaxes(showgrid=False)
-        st.plotly_chart(fig, width="stretch")
+        fig.update_yaxes(showgrid=False, tickfont=dict(color=ENCRE))
+        afficher(fig)
     with st.expander("Voir les valeurs en tableau"):
-        st.dataframe(donnees[["region", col]].sort_values(col, ascending=False).rename(columns={"region": "Région", col: libelle}),
-                     hide_index=True, width="stretch")
+        st.dataframe(donnees.assign(Région=donnees.region.map(joli))[["Région", col]].sort_values(col, ascending=False)
+                     .rename(columns={col: libelle}), hide_index=True, width="stretch")
 
 # =========================================================================================
 # 2. Fiche par région
 # =========================================================================================
 with fiche:
-    nom = st.selectbox("Région", prev.sort_values("rang_priorite").region, format_func=str.title)
+    nom = st.selectbox("Région", prev.sort_values("rang_priorite").region, format_func=joli)
     p = prev[prev.region == nom].iloc[0]
     h = regions[regions.region == nom].sort_values("annee_fin")
     c1, c2, c3, c4 = st.columns(4)
-    c1.metric(f"Taux d'abandon prévu {AN_PREVU}", f"{p.risque_prevu:.1f} %",
-              f"{p.risque_prevu - p.abandon_t:+.1f} pt par rapport à {AN_DONNEES}", delta_color="inverse")
+    c1.metric(f"Taux d'abandon prévu {AN_PREVU}", f"{fr(p.risque_prevu)} %",
+              f"{fr(p.risque_prevu - p.abandon_t)} pt par rapport à {AN_DONNEES}", delta_color="inverse")
     c2.markdown(f"**Niveau de risque**<br><span style='font-size:1.6em'>{pastille(p.niveau_risque)}</span>", unsafe_allow_html=True)
     c3.metric("Rang de priorité", f"{p.rang_priorite} sur 13")
     c4.metric("Confiance dans l'estimation", p.confiance,
-              help=f"Selon l'erreur du modèle sur cette région lors des tests passés ({p.erreur_passee:.1f} points en moyenne).")
-    st.markdown(f"Fourchette probable : **{p.borne_basse:.1f} % à {p.borne_haute:.1f} %** (8 fois sur 10 lors des tests). "
+              help=f"Selon l'erreur du modèle sur cette région lors des tests passés ({fr(p.erreur_passee)} points en moyenne).")
+    st.markdown(f"Fourchette probable : **de {fr(p.borne_basse)} % à {fr(p.borne_haute)} %** (8 fois sur 10 lors des tests). "
                 f"Profil : **{p.profil}**.")
     st.caption("Prévision en l'absence de nouveau choc (fermetures ou retours massifs d'élèves) : lors des chocs, "
-               f"l'erreur du modèle atteint {meta.get('erreur_modele_chocs', 0):.0f} points en moyenne.")
+               f"l'erreur du modèle atteint {fr(meta.get('erreur_modele_chocs', 0), 0)} points en moyenne.")
     if p.flux_origine != "publie":
         st.info("Les taux d'abandon récents de cette région sont estimés à partir des provinces.")
 
-    g, d = st.columns(2)
+    g, d = st.columns(2, gap="large")
     with g:
         st.subheader("Évolution du taux d'abandon")
         fig = go.Figure()
         for s, lib, coul, trait in [("abandon_g", "Garçons", BLEU, "solid"), ("abandon_f", "Filles", "#eb6834", "solid"),
                                     ("abandon_t", "Ensemble", "#0b0b0b", "dot")]:
             fig.add_scatter(x=h.annee_scolaire, y=h[s], name=lib, mode="lines+markers", line=dict(color=coul, width=2, dash=trait),
-                            marker=dict(size=8), hovertemplate=lib + " : %{y:.1f} %<extra></extra>")
+                            marker=dict(size=8, line=dict(width=2, color=SURFACE)), hovertemplate=lib + " : %{y:.1f} %<extra></extra>")
         fig.add_scatter(x=[AN_PREVU], y=[p.risque_prevu], name="Prévision", mode="markers",
                         marker=dict(size=13, color="#0b0b0b", symbol="diamond-open", line=dict(width=2)),
                         error_y=dict(type="data", symmetric=False, array=[p.borne_haute - p.risque_prevu],
                                      arrayminus=[p.risque_prevu - p.borne_basse], color=NEUTRE, thickness=1.5),
                         hovertemplate="Prévision : %{y:.1f} %<extra></extra>")
         mise_en_forme(fig, 360, "Taux d'abandon (%)").update_layout(hovermode="x unified")
-        st.plotly_chart(fig, width="stretch")
+        afficher(fig)
         st.caption("Les années de forte hausse correspondent surtout aux fermetures d'écoles liées à l'insécurité, "
                    "pas uniquement à des élèves qui décrochent d'une école restée ouverte.")
     with d:
         st.subheader("Ce qui pèse sur le risque estimé")
         s = shap[shap.region == nom].assign(a=lambda x: x.contribution.abs()).nlargest(8, "a").sort_values("contribution")
         fig = go.Figure(go.Bar(
-            x=s.contribution, y=[f"{l} = {v:.1f}" for l, v in zip(s.libelle, s.valeur)], orientation="h",
-            marker_color=[HAUSSE if c > 0 else BAISSE for c in s.contribution],
-            text=[f"{c:+.1f}" for c in s.contribution], textposition="outside", cliponaxis=False,
+            x=s.contribution, y=[f"{l} = {fr(v)}" for l, v in zip(s.libelle, s.valeur)], orientation="h",
+            marker=dict(color=[HAUSSE if c > 0 else BAISSE for c in s.contribution], cornerradius=4),
+            texttemplate="%{x:+.1f}", textposition="outside", cliponaxis=False,
             hovertemplate="%{y}<br>contribution : %{x:+.2f} point<extra></extra>"))
         mise_en_forme(fig, 360, titre_x="Contribution au taux prévu (points)")
-        fig.add_vline(x=0, line_color="#c3c2b7")
-        fig.update_yaxes(showgrid=False)
-        st.plotly_chart(fig, width="stretch")
-        st.caption(f"Rouge : augmente le risque estimé ; bleu : le réduit. Point de départ : {meta['base_shap']:.1f} %, "
+        fig.add_vline(x=0, line_color=AXE)
+        fig.update_yaxes(showgrid=False, tickfont=dict(color=ENCRE))
+        afficher(fig)
+        st.caption(f"Rouge : augmente le risque estimé ; bleu : le réduit. Point de départ : {fr(meta['base_shap'])} %, "
                    "moyenne des prévisions du modèle. Méthode SHAP : ce sont des associations, pas des causes démontrées.")
 
     st.subheader("Indice composite par dimension")
@@ -203,13 +273,14 @@ with fiche:
             "indice_ecarts": "Écarts filles-garçons", "indice_acces": "Accès et continuité"}
     dern = regions[regions.annee_fin == regions.annee_fin.max()]
     fig = go.Figure()
-    fig.add_bar(x=list(dims.values()), y=[p[k] for k in dims], name=nom.title(), marker_color=BLEU,
-                text=[f"{p[k]:.0f}" for k in dims], textposition="outside", hovertemplate="%{x} : %{y:.0f}<extra></extra>")
-    fig.add_bar(x=list(dims.values()), y=[dern[k].mean() for k in dims], name="Moyenne des 13 régions", marker_color=BLEU_CLAIR,
-                text=[f"{dern[k].mean():.0f}" for k in dims], textposition="outside", hovertemplate="%{x} : %{y:.0f}<extra></extra>")
+    fig.add_bar(x=list(dims.values()), y=[p[k] for k in dims], name=joli(nom), marker=dict(color=BLEU, cornerradius=4),
+                texttemplate="%{y:.0f}", textposition="outside", hovertemplate="%{x} : %{y:.0f}<extra></extra>")
+    fig.add_bar(x=list(dims.values()), y=[dern[k].mean() for k in dims], name="Moyenne des 13 régions",
+                marker=dict(color=BLEU_CLAIR, cornerradius=4), texttemplate="%{y:.0f}", textposition="outside",
+                hovertemplate="%{x} : %{y:.0f}<extra></extra>")
     mise_en_forme(fig, 300, "Indice (0 = favorable, 100 = défavorable)").update_layout(bargap=0.35, bargroupgap=0.08)
     fig.update_yaxes(range=[0, 115])
-    st.plotly_chart(fig, width="stretch")
+    afficher(fig)
 
     cols_fiche = {"annee_scolaire": "Année", "abandon_t": "Abandon (%)", "redoublement_t": "Redoublement (%)",
                   "achevement_t": "Achèvement (%)", "var_effectif_pct": "Var. effectifs (%)", "var_ecoles_pct": "Var. écoles (%)",
@@ -240,10 +311,10 @@ def export_pdf(df):
     pdf = FPDF(orientation="L")
     pdf.add_page()
     pdf.set_font("Helvetica", "B", 14)
-    pdf.cell(0, 9, latin(f"Régions prioritaires - risque de décrochage au primaire, {AN_PREVU}"), new_x="LMARGIN", new_y="NEXT")
+    pdf.cell(0, 9, latin(f"Régions prioritaires : risque de décrochage au primaire, {AN_PREVU}"), new_x="LMARGIN", new_y="NEXT")
     pdf.set_font("Helvetica", "", 9)
-    pdf.multi_cell(0, 5, latin(f"Taux d'abandon prévu par le modèle ({meta['modele_retenu']}) à partir des données {AN_DONNEES}. "
-                               f"Fourchette à 80 % : plus ou moins {meta['demi_intervalle_80']} points. "
+    pdf.multi_cell(0, 5, latin(f"Taux d'abandon prévu par le modèle ({meta['modele_retenu']}) à partir des données {AN_DONNEES}, "
+                               f"en l'absence de nouveau choc. Fourchette à 80 % : plus ou moins {fr(meta['demi_intervalle_80'])} points. "
                                "Ces résultats servent à cibler les actions, pas à juger une région."), new_x="LMARGIN", new_y="NEXT")
     pdf.ln(2)
     cols = ["Rang", "Région", f"Abandon prévu {AN_PREVU} (%)", "Niveau de risque", "Confiance", "Profil", "Principaux facteurs"]
@@ -254,8 +325,9 @@ def export_pdf(df):
     pdf.ln()
     pdf.set_font("Helvetica", "", 7)
     for _, r in df[cols].iterrows():
-        for c, l in zip(cols, larg):
-            pdf.cell(l, 7, latin(r[c])[: int(l / 1.35)], border=1)
+        valeurs = [r.Rang, r["Région"], fr(r[cols[2]]), r["Niveau de risque"], r.Confiance, r.Profil, r["Principaux facteurs"]]
+        for v, l in zip(valeurs, larg):
+            pdf.cell(l, 7, latin(v)[: int(l / 1.35)], border=1)
         pdf.ln()
     return bytes(pdf.output())
 
@@ -263,27 +335,29 @@ def export_pdf(df):
 with priorites:
     st.subheader(f"Classement des régions selon le risque estimé pour {AN_PREVU}")
     t = prev.sort_values("rang_priorite")[list(COLS_EXPORT)].rename(columns=COLS_EXPORT)
-    t["Région"] = t["Région"].str.title()
+    t["Région"] = t["Région"].map(joli)
     lignes = "".join(
-        f"<tr><td>{r.Rang}</td><td><b>{r['Région']}</b></td><td style='text-align:right'>{r.iloc[2]:.1f}</td>"
-        f"<td style='text-align:right'>{r['Fourchette basse']:.1f} à {r['Fourchette haute']:.1f}</td>"
+        f"<tr><td>{r.Rang}</td><td><b>{r['Région']}</b></td><td style='text-align:right'>{fr(r.iloc[2])}</td>"
+        f"<td style='text-align:right'>de {fr(r['Fourchette basse'])} à {fr(r['Fourchette haute'])}</td>"
         f"<td>{pastille(r['Niveau de risque'])}</td><td>{r['Confiance']}</td><td>{r['Profil']}</td>"
         f"<td style='font-size:0.85em'>{r['Principaux facteurs']}</td></tr>" for _, r in t.iterrows())
     st.markdown("<table style='width:100%'><tr><th>Rang</th><th>Région</th><th>Abandon prévu (%)</th><th>Fourchette</th>"
                 f"<th>Niveau</th><th>Confiance</th><th>Profil</th><th>Principaux facteurs de hausse</th></tr>{lignes}</table>",
                 unsafe_allow_html=True)
     s1, s2, s3 = meta["seuils_niveaux"]
-    st.caption(f"Niveaux : faible sous {s1} %, modéré de {s1} à {s2} %, élevé de {s2} à {s3} %, très élevé au-delà "
-               "(quartiles des taux prévus par le modèle sur les années testées, de 2020-21 à 2024-25). "
+    st.caption(f"Niveaux : faible sous {fr(s1)} %, modéré de {fr(s1)} à {fr(s2)} %, élevé de {fr(s2)} à {fr(s3)} %, très élevé "
+               "au-delà (quartiles des taux prévus par le modèle sur les années testées, de 2020-21 à 2024-25). "
                "Prévisions en l'absence de nouveau choc.")
     b1, b2, _ = st.columns([1, 1, 4])
     b1.download_button("Exporter en Excel", export_excel(t), "regions_prioritaires.xlsx",
-                       "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-    b2.download_button("Exporter en PDF", export_pdf(t), "regions_prioritaires.pdf", "application/pdf")
+                       "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", icon=":material/table:")
+    b2.download_button("Exporter en PDF", export_pdf(t), "regions_prioritaires.pdf", "application/pdf",
+                       icon=":material/picture_as_pdf:")
 
     st.subheader("Profils de risque")
     for _, r in profils.iterrows():
-        st.markdown(f"**{r.profil}** (indice moyen {r.indice_risque:.0f}) : {r.regions.title()}")
+        membres = ", ".join(joli(x.strip()) for x in r.regions.split(","))
+        st.markdown(f"**{r.profil}** (indice moyen {fr(r.indice_risque, 0)}) : {membres}")
 
 # =========================================================================================
 # 4. Simulateur
@@ -294,20 +368,21 @@ LEVIERS = {"prim_ratio_eleves_maitre_total": (20.0, 90.0, 1.0), "prim_eleves_par
 
 with simulateur:
     st.subheader("Que devient le risque estimé si les conditions changent ?")
-    nom_s = st.selectbox("Région à simuler", prev.sort_values("rang_priorite").region, format_func=str.title, key="sim")
+    nom_s = st.selectbox("Région à simuler", prev.sort_values("rang_priorite").region, format_func=joli, key="sim")
     ligne = regions[(regions.region == nom_s) & (regions.annee_fin == regions.annee_fin.max())].iloc[0].copy()
     variables_modele = charger_variables_modele()
     x0 = variables_modele[variables_modele.region == nom_s][list(VARS)].astype(float).reset_index(drop=True)
     x1 = x0.copy()
-    cg, cd = st.columns(2)
+    cg, cd = st.columns(2, gap="large")
     for i, (v, (mn, mx, pas)) in enumerate(LEVIERS.items()):
         actuel = float(x0[v].iloc[0])
-        x1[v] = (cg if i % 2 == 0 else cd).slider(f"{VARS[v]} (actuel : {actuel:.1f})", mn, mx, float(min(max(round(actuel, 1), mn), mx)), 0.1, key=f"{nom_s}_{v}")
+        x1[v] = (cg if i % 2 == 0 else cd).slider(f"{VARS[v]} (actuel : {fr(actuel)})", mn, mx,
+                                                  float(min(max(round(actuel, 1), mn), mx)), 0.1, key=f"{nom_s}_{v}")
     avant, apres = float(modele.predict(x0)[0]), float(modele.predict(x1)[0])
     m1, m2, m3 = st.columns(3)
-    m1.metric("Taux d'abandon prévu, situation actuelle", f"{avant:.1f} %")
-    m2.metric("Taux d'abandon prévu, scénario", f"{apres:.1f} %", f"{apres - avant:+.1f} point", delta_color="inverse")
-    m3.metric("Élèves concernés (ordre de grandeur)", f"{abs(apres - avant) / 100 * ligne.effectif:,.0f}".replace(",", " "),
+    m1.metric("Taux d'abandon prévu, situation actuelle", f"{fr(avant)} %")
+    m2.metric("Taux d'abandon prévu, scénario", f"{fr(apres)} %", f"{fr(apres - avant)} point", delta_color="inverse")
+    m3.metric("Élèves concernés (ordre de grandeur)", fr(abs(apres - avant) / 100 * ligne.effectif, 0),
               help="Écart de taux appliqué à l'effectif actuel du primaire de la région.")
     st.warning("À lire comme une indication, pas comme une promesse d'effet. Le modèle repère des associations entre "
                "régions et années ; il ne prouve pas qu'améliorer un facteur fera baisser l'abandon d'autant. "
@@ -333,8 +408,7 @@ with methode:
         "annuelles. Le modèle apprend donc sur les transitions sans choc (effectifs stables à ± 10 %, écoles en baisse de "
         f"moins de 10 %), et le tableau ci-dessous porte sur ces {meta.get('n_cas_valides', '')} transitions. Sur les "
         f"{meta.get('n_cas_chocs', '')} années de choc ou de retour, son erreur moyenne atteint "
-        f"{meta.get('erreur_modele_chocs', 0):.1f} points.")
-
+        f"{fr(meta.get('erreur_modele_chocs', 0))} points.")
     v = val.rename(columns={"modele": "Méthode", "erreur_absolue_moyenne": "Erreur moyenne (points)",
                             "erreur_absolue_mediane": "Erreur médiane (points)", "rmse": "RMSE",
                             "correlation_rang": "Corrélation de rang", "top4_retrouve": "Part des 4 régions les plus touchées retrouvées"})
@@ -345,13 +419,13 @@ with methode:
     an = st.select_slider("Année cible", sorted(valp.annee_cible.unique()), format_func=lambda a: f"{a - 1}-{a}")
     w = valp[valp.annee_cible == an].sort_values("abandon_suivant")
     fig = go.Figure()
-    fig.add_bar(y=w.region.str.title(), x=w.abandon_suivant, orientation="h", name="Observé", marker_color=BLEU,
+    fig.add_bar(y=w.region.map(joli), x=w.abandon_suivant, orientation="h", name="Observé", marker=dict(color=BLEU, cornerradius=4),
                 hovertemplate="Observé : %{x:.1f} %<extra></extra>")
-    fig.add_scatter(y=w.region.str.title(), x=w[nom_m], mode="markers", name="Prévu par le modèle",
+    fig.add_scatter(y=w.region.map(joli), x=w[nom_m], mode="markers", name="Prévu par le modèle",
                     marker=dict(size=11, color="#0b0b0b", symbol="diamond-open", line=dict(width=2)),
                     hovertemplate="Prévu : %{x:.1f} %<extra></extra>")
-    mise_en_forme(fig, 430, titre_x="Taux d'abandon (%)").update_yaxes(showgrid=False)
-    st.plotly_chart(fig, width="stretch")
+    mise_en_forme(fig, 430, titre_x="Taux d'abandon (%)").update_yaxes(showgrid=False, tickfont=dict(color=ENCRE))
+    afficher(fig)
 
     st.subheader("Composition de l'indice composite")
     st.dataframe(definition.assign(sens=definition.sens.map({1: "plus élevé = plus de risque", -1: "plus élevé = moins de risque"}))
@@ -361,9 +435,14 @@ with methode:
     st.subheader("Limites")
     st.markdown("""
 - **Abandon et insécurité.** Dans les régions touchées, le taux d'abandon mesure surtout des fermetures d'écoles. Un taux qui retombe l'année suivante ne signifie pas que la situation est réglée.
-- **Peu de données.** 13 régions et 10 années : les résultats sont des ordres de grandeur. Les fourchettes affichées sont larges pour cette raison.
+- **Peu de données.** 13 régions et 10 années : les résultats sont des ordres de grandeur.
 - **Années 2015-16 à 2017-18.** Les taux régionaux de promotion, redoublement et abandon sont estimés à partir des provinces (écart médian de 0,1 point, plus rarement jusqu'à 5 points).
 - **Niveau géographique.** Tout est calculé par région. Une région peu risquée en moyenne peut contenir des provinces en grande difficulté.
 - **Milieu urbain ou rural, pauvreté, écoles fermées.** Ces facteurs ne sont pas encore dans la base au niveau régional.
 - **Usage.** Ces résultats servent à cibler des actions, jamais à stigmatiser une région.
 """)
+
+st.divider()
+st.caption("**Équipe Insighters** · Data Challenge Burkina 2026, Défi 1. Données : Data Challenge Burkina (préscolaire et "
+           "primaire, 2015-16 à 2024-25), annuaires statistiques du primaire (DGESS), INSD. Limites des régions : GADM 4.1. "
+           "Les résultats servent à cibler les actions, jamais à stigmatiser une région.")

@@ -24,3 +24,6 @@ venv/
 
 # État local de l'outil d'orchestration
 .omc/
+
+# Secrets : clé de l API de l assistant (ne jamais publier)
+.env

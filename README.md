@@ -17,9 +17,10 @@ La démarche complète, les résultats et les limites sont décrits dans [`Docum
 | Enrichissement | Ajout de sources officielles : annuaires statistiques du primaire (DGESS) et open data de l'INSD. Le panel passe de 43 à 126 variables, dont les taux d'abandon, de redoublement et de promotion | `02_telecharger_sources.py`, `03_enrichir_base.py` |
 | 1. Indicateurs | Abandon, redoublement, promotion, achèvement, évolution des effectifs et des écoles, par région, année et sexe | `04_indicateurs_indice.py` |
 | 2. Indice composite | Indice de risque de 0 à 100 sur quatre dimensions : conditions d'enseignement, équipements, écarts filles-garçons, accès et continuité | `04_indicateurs_indice.py` |
-| 3. Modèle prédictif | Taux d'abandon de l'année suivante ; régression Ridge, forêt aléatoire et gradient boosting comparés par validation sur des années jamais vues | `05_modele_risque.py` |
+| 3. Modèle prédictif | Taux d'abandon de l'année suivante en l'absence de choc ; forêt aléatoire retenue après comparaison (persistance, moyenne historique, Ridge, gradient boosting) sur des années jamais vues. Il remplace le modèle du script 05, dont l'indice et les profils sont conservés | `06_modele_insighters.py` |
 | 4. Explication et profils | Facteurs par région (SHAP) et regroupement des régions en profils de risque | `05_modele_risque.py` |
 | 5. Plateforme | Application Streamlit : carte des risques, fiche par région, classement exportable en Excel et PDF, simulateur de scénarios | `app/streamlit_app.py` |
+| Assistant | Questions en langage simple sur les résultats ; réponses de Claude fondées uniquement sur `data/modele/`, chiffres et sources cités | `app/assistant.py` |
 
 ## Installation et lancement
 
@@ -32,6 +33,17 @@ streamlit run app/streamlit_app.py
 
 Les résultats déjà calculés sont dans le dépôt (`data/modele/`) : la plateforme se lance directement.
 
+### Assistant conversationnel (facultatif)
+
+L'onglet « Assistant » répond aux questions en langage simple avec Claude (API d'Anthropic). Il s'appuie uniquement sur les résultats de `data/modele/`, cite les chiffres utilisés et distingue associations et causes. Pour l'activer, créer un fichier `.env` à la racine du dépôt :
+
+```bash
+ANTHROPIC_API_KEY=votre_clé
+CLAUDE_MODEL=claude-opus-5-5   # facultatif : modèle utilisé par défaut
+```
+
+`.env` est exclu de git par `.gitignore` : ne jamais publier la clé. En ligne (Streamlit Community Cloud), déclarer les mêmes variables dans les secrets de l'application. Sans clé, l'onglet indique simplement que l'assistant n'est pas configuré. Une réponse prend une dizaine de secondes.
+
 ### Relancer toute la chaîne
 
 ```bash
@@ -39,7 +51,8 @@ python3 scripts/01_constitution_base.py     # base fournie : nettoyage, panel, a
 python3 scripts/02_telecharger_sources.py   # télécharge les annuaires DGESS et les données de l'API INSD
 python3 scripts/03_enrichir_base.py         # extraction des annuaires, fusion, contrôles croisés
 python3 scripts/04_indicateurs_indice.py    # indicateurs, indice, limites des régions
-python3 scripts/05_modele_risque.py         # modèle, validation, SHAP, profils
+python3 scripts/05_modele_risque.py         # indice, profils (et un premier modèle, remplacé par le script 06)
+python3 scripts/06_modele_insighters.py     # modèle retenu : abandon en l'absence de choc, validation, SHAP
 ```
 
 Les sources officielles téléchargées (environ 500 Mo de PDF) ne sont pas versionnées : le script 02 les récupère dans `data/externe/brut/` et doit être lancé avant le script 03 sur un clone neuf. `python3 scripts/02_telecharger_sources.py --lister` affiche ce qui serait téléchargé sans rien écrire.
@@ -75,7 +88,8 @@ Dans le panel, la ligne `code_region == "BF"` est le total national : à exclure
 ## Limites
 
 - **Abandon et insécurité.** Dans les régions touchées, le taux d'abandon reflète en grande partie les fermetures d'écoles ; une baisse ne signifie pas que les élèves sont revenus.
-- **Peu d'observations.** 13 régions sur 10 années : les prévisions sont des ordres de grandeur, avec une fourchette à 80 % de plus ou moins 12,7 points.
+- **Peu d'observations.** 13 régions sur 10 années (74 transitions sans choc pour l'apprentissage) : les prévisions sont des ordres de grandeur, avec une fourchette à 80 % de plus ou moins 3,9 points.
+- **Prévision en l'absence de choc.** Le modèle ne prévoit ni les fermetures ni les retours massifs d'élèves : lors de ces années, son erreur moyenne atteint 13 points.
 - **Années 2015-16 à 2017-18.** Les taux régionaux de flux y sont estimés à partir des provinces (colonne `prim_flux_origine`).
 - **Associations, pas causes.** Les facteurs et le simulateur indiquent où regarder ; ils ne prouvent pas l'effet d'une intervention.
 

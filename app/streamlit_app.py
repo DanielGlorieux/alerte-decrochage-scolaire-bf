@@ -15,6 +15,8 @@ import plotly.graph_objects as go
 import streamlit as st
 from fpdf import FPDF
 
+import assistant as aide  # onglet « Assistant » (app/assistant.py)
+
 M = Path(__file__).resolve().parents[1] / "data/modele"
 
 
@@ -50,6 +52,12 @@ def charger_modele():
     return joblib.load(M / "modele.joblib")
 
 
+@st.cache_data
+def charger_variables_modele():
+    """Variables du modèle pour la dernière année, une ligne par région (scripts/06_modele_insighters.py)."""
+    return pd.read_csv(M / "variables_modele.csv")
+
+
 ind, prev, shap, val, valp, profils, meta, geo, definition = charger()
 modele = charger_modele()
 VARS = meta["variables"]
@@ -75,8 +83,8 @@ st.title("Alerte précoce du décrochage scolaire au primaire")
 st.caption(f"Burkina Faso, 13 régions. Données {ind.annee_scolaire.min()} à {AN_DONNEES} ; risque estimé pour {AN_PREVU}. "
            "Sources : données du Data Challenge Burkina, annuaires statistiques de l'enseignement primaire (DGESS).")
 
-carte, fiche, priorites, simulateur, methode = st.tabs(
-    ["Carte des risques", "Fiche par région", "Régions prioritaires", "Simulateur", "Méthode et limites"])
+carte, fiche, priorites, simulateur, assistant, methode = st.tabs(
+    ["Carte des risques", "Fiche par région", "Régions prioritaires", "Simulateur", "Assistant", "Méthode et limites"])
 
 # =========================================================================================
 # 1. Carte
@@ -153,6 +161,8 @@ with fiche:
               help=f"Selon l'erreur du modèle sur cette région lors des tests passés ({p.erreur_passee:.1f} points en moyenne).")
     st.markdown(f"Fourchette probable : **{p.borne_basse:.1f} % à {p.borne_haute:.1f} %** (8 fois sur 10 lors des tests). "
                 f"Profil : **{p.profil}**.")
+    st.caption("Prévision en l'absence de nouveau choc (fermetures ou retours massifs d'élèves) : lors des chocs, "
+               f"l'erreur du modèle atteint {meta.get('erreur_modele_chocs', 0):.0f} points en moyenne.")
     if p.flux_origine != "publie":
         st.info("Les taux d'abandon récents de cette région sont estimés à partir des provinces.")
 
@@ -264,7 +274,8 @@ with priorites:
                 unsafe_allow_html=True)
     s1, s2, s3 = meta["seuils_niveaux"]
     st.caption(f"Niveaux : faible sous {s1} %, modéré de {s1} à {s2} %, élevé de {s2} à {s3} %, très élevé au-delà "
-               "(quartiles des taux d'abandon régionaux observés depuis 2016-17).")
+               "(quartiles des taux prévus par le modèle sur les années testées, de 2020-21 à 2024-25). "
+               "Prévisions en l'absence de nouveau choc.")
     b1, b2, _ = st.columns([1, 1, 4])
     b1.download_button("Exporter en Excel", export_excel(t), "regions_prioritaires.xlsx",
                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
@@ -277,16 +288,16 @@ with priorites:
 # =========================================================================================
 # 4. Simulateur
 # =========================================================================================
-LEVIERS = {"ratio_eleves_maitre": (20.0, 90.0, 1.0), "eleves_par_salle": (20.0, 90.0, 1.0),
-           "pct_ecoles_eau": (0.0, 100.0, 1.0), "pct_ecoles_latrines": (0.0, 100.0, 1.0),
-           "pct_ecoles_cantine": (0.0, 100.0, 1.0), "pct_ecoles_electricite": (0.0, 100.0, 1.0)}
+LEVIERS = {"prim_ratio_eleves_maitre_total": (20.0, 90.0, 1.0), "prim_eleves_par_salle": (20.0, 90.0, 1.0),
+           "prim_pct_ecoles_eau_potable": (0.0, 100.0, 1.0), "prim_pct_ecoles_latrines": (0.0, 100.0, 1.0),
+           "prim_pct_ecoles_electricite": (0.0, 100.0, 1.0)}
 
 with simulateur:
     st.subheader("Que devient le risque estimé si les conditions changent ?")
     nom_s = st.selectbox("Région à simuler", prev.sort_values("rang_priorite").region, format_func=str.title, key="sim")
     ligne = regions[(regions.region == nom_s) & (regions.annee_fin == regions.annee_fin.max())].iloc[0].copy()
-    ligne["moyenne_historique"] = prev[prev.region == nom_s].moyenne_historique.iloc[0]
-    x0 = pd.DataFrame([ligne[list(VARS)].astype(float)])
+    variables_modele = charger_variables_modele()
+    x0 = variables_modele[variables_modele.region == nom_s][list(VARS)].astype(float).reset_index(drop=True)
     x1 = x0.copy()
     cg, cd = st.columns(2)
     for i, (v, (mn, mx, pas)) in enumerate(LEVIERS.items()):
@@ -300,17 +311,30 @@ with simulateur:
               help="Écart de taux appliqué à l'effectif actuel du primaire de la région.")
     st.warning("À lire comme une indication, pas comme une promesse d'effet. Le modèle repère des associations entre "
                "régions et années ; il ne prouve pas qu'améliorer un facteur fera baisser l'abandon d'autant. "
-               "Il ne dispose que de 117 observations et ses erreurs passées sont larges (voir Méthode et limites).")
+               f"Il ne dispose que de {meta['n_apprentissage']} observations (voir Méthode et limites).")
 
 # =========================================================================================
-# 5. Méthode et limites
+# 5. Assistant conversationnel (réponses fondées sur les seuls résultats de data/modele/)
+# =========================================================================================
+with assistant:
+    aide.afficher()
+
+# =========================================================================================
+# 6. Méthode et limites
 # =========================================================================================
 with methode:
     st.subheader("Le modèle a-t-il bien anticipé le passé ?")
     st.markdown(
         f"Pour chaque année de 2020-21 à 2024-25, le modèle a été entraîné uniquement sur les années précédentes, puis "
         f"comparé à ce qui s'est produit. Modèle retenu : **{meta['modele_retenu']}**, sur {meta['n_apprentissage']} observations.")
-        
+    st.markdown(
+        "Le modèle prévoit le taux d'abandon **en l'absence de choc**. Lors d'un choc, le taux publié mesure surtout des "
+        "fermetures d'écoles, puis s'effondre l'année des retours : ces années ne sont pas prévisibles à partir des données "
+        "annuelles. Le modèle apprend donc sur les transitions sans choc (effectifs stables à ± 10 %, écoles en baisse de "
+        f"moins de 10 %), et le tableau ci-dessous porte sur ces {meta.get('n_cas_valides', '')} transitions. Sur les "
+        f"{meta.get('n_cas_chocs', '')} années de choc ou de retour, son erreur moyenne atteint "
+        f"{meta.get('erreur_modele_chocs', 0):.1f} points.")
+
     v = val.rename(columns={"modele": "Méthode", "erreur_absolue_moyenne": "Erreur moyenne (points)",
                             "erreur_absolue_mediane": "Erreur médiane (points)", "rmse": "RMSE",
                             "correlation_rang": "Corrélation de rang", "top4_retrouve": "Part des 4 régions les plus touchées retrouvées"})

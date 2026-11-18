@@ -2,10 +2,12 @@ pandas
 pyarrow
 openpyxl
 requests
-scikit-learn
+scikit-learn==1.9.1
 shap
 joblib
 streamlit
 plotly
 fpdf2
 geopandas
+anthropic>=2.8
+python-dotenv
